@@ -1,0 +1,31 @@
+{
+  "name": "integrate-openapi-to-ts-app",
+  "version": "0.0.2",
+  "description": "Generated API client from openapi",
+  "main": "clients/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manawasp/integrate-openapi-to-ts-app.git"
+  },
+  "keywords": [
+    "openapi",
+    "ts",
+    "webapp",
+    "app",
+    "fastapi",
+    "vue",
+    "vitesse"
+  ],
+  "author": "Clovis Kyndt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manawasp/integrate-openapi-to-ts-app/issues"
+  },
+  "files": [
+    "clients/"
+  ],
+  "homepage": "https://github.com/manawasp/integrate-openapi-to-ts-app#readme"
+}
