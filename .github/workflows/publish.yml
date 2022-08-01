@@ -1,0 +1,40 @@
+name: Publish to NPM registry
+on:
+  push:
+    tags:
+      - '*'
+  # release:
+  #   types: [created]
+
+
+defaults:
+ run:
+  working-directory: ./api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Generate openapi
+        run: python openapi.py
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Convert OpenAPI to TS Client
+        run: npx --yes openapi-typescript-codegen --input openapi.json --output clients --useOptions --name FoodyClient
+      - name: Set version
+        run: npm version ${GITHUB_REF/refs\/tags\//} --no-git-tag-version
+      - name: Publish package on NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

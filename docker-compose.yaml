@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  app:
+    build: ./app
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    links:
+      - api:api
+    networks:
+      main:
+        aliases:
+          - app
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    networks:
+      main:
+        aliases:
+          - api
+
+networks:
+  main:
