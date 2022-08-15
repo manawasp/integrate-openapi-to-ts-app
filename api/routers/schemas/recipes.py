@@ -34,10 +34,10 @@ class Recipe(BaseModel):
 # input
 
 
-class ListRecipesQuery(BaseModel):
+class ListRecipesQuery:
     def __init__(
         self,
-        ob: Optional[str] = Query(
+        ob: str = Query(
             "-created_at",
             min=1,
             min_length=1,
@@ -51,23 +51,30 @@ class ListRecipesQuery(BaseModel):
             title="Optional search value (partial search)",
             example="some value",
         ),  # noqa: E741
-        sf: Optional[str] = Query(
-            "name,description",
+        sf: str = Query(
+            "name",
             min_length=1,
             title="Field(s) to filter on, comma separated",
             example="name,description",
         ),
-        l: Optional[int] = Query(  # noqa: E741
+        l: int = Query(  # noqa: E741
             20,
             min=5,
             max=200,
             title="Maximum number of items to return",
             example="20",  # noqa: E741
         ),
-        p: Optional[int] = Query(1, min=1, title="Current page number", example="1"),
-        **kwargs
+        p: int = Query(1, min=1, title="Current page number", example="1"),
     ):
-        super().__init__(ob, s, sf, l, p, **kwargs)  # type: ignore
+
+        self.order_by = ob.split(",")
+        self.limit = l
+        self.page = p
+        self.search = {column: s for column in sf.split(",")} if s is not None else {}
+
+    def dict(self):
+        """Dict representation of the current class."""
+        return self.__dict__
 
 
 class PostRecipePayload(BaseModel):
@@ -88,7 +95,7 @@ class PatchRecipePayload(BaseModel):
 
 
 class ListRecipes(ListGenericResponse):
-    objects: List[Recipe]
+    recipes: List[Recipe]
 
     class Config:
         # to read the data even if it is not a dict but an orm model

@@ -1,6 +1,6 @@
 # Integrate OpenAPI to TS app
 
-Demonstrate a strategy to limit API integration friction in a TS application.
+Demonstrate a strategy to limit api integration friction in a typescript application.
 
 ## Summary
 
@@ -11,10 +11,10 @@ Demonstrate a strategy to limit API integration friction in a TS application.
     - [1. Generate the OpenAPI from the API code source](#1-generate-the-openapi-from-the-api-code-source)
       - [Python](#python)
       - [Go](#go)
-    - [2. Generate & use the TS client](#2-generate--use-the-ts-client)
+    - [2. Generate & use the typescript client](#2-generate--use-the-typescript-client)
     - [3. Models](#3-models)
   - [Automatisation](#automatisation)
-    - [1. Generate NPM TS client](#1-generate-npm-ts-client)
+    - [1. Generate NPM typescript client](#1-generate-npm-typescript-client)
       - [Github Actions](#github-actions)
       - [Gitlab CI](#gitlab-ci)
     - [2. Integrations](#2-integrations)
@@ -25,31 +25,31 @@ Demonstrate a strategy to limit API integration friction in a TS application.
 
 This repository uses:
 
-- [OpenAPI TypeScript codegen](https://github.com/ferdikoomen/openapi-typescript-codegen#openapi-typescript-codegen): generates Typescript clients based on the OpenAPI specification.
-- [Github Action](https://docs.github.com/en/actions): Continuous Integration Job, to generate and publish the generated Typescript client to NPM
-- [FastAPI](https://fastapi.tiangolo.com/): Python framework to build API and to generate OpenAPI
-- [Vitesse lite](https://github.com/antfu/vitesse-lite): Vue boilerplate using TS
+- [OpenAPI TypeScript codegen](https://github.com/ferdikoomen/openapi-typescript-codegen#openapi-typescript-codegen): generates typescript clients based on the openapi specification.
+- [Github Action](https://docs.github.com/en/actions): Continuous Integration Job, to generate and publish the generated typescript client to NPM
+- [FastAPI](https://fastapi.tiangolo.com/): Python framework to build api and to generate openapi
+- [Vitesse lite](https://github.com/antfu/vitesse-lite): Vue boilerplate using typescript
 
 ## Exploration
 
-Quick overview of how to generate step by step a TS Client from a FastAPI
+Quick overview of how to generate step by step a typescript client from a FastAPI
 
 ### 1. Generate the OpenAPI from the API code source
 
 #### Python
 
-Build a [FastAPI](https://fastapi.tiangolo.com/) which natively generates OpenAPI.
+Build a [FastAPI](https://fastapi.tiangolo.com/) which natively generates openapi.
 
 **[api/routers/recipes_comments.py](./api/routers/recipes_comments.py)**
 
 ```python
 router = APIRouter(
-    prefix="/recipes/{recipe_id}/comments",
-    ...
+    tags=["recipesComments"],
+    responses={"403": ERROR_RESPONSES[403]},
 )
 
 @router.post(
-    "/",
+    "/recipes/{recipe_id}/comments",
     name="recipes comments create",
     ...
 )
@@ -126,13 +126,13 @@ func (s *Server) recipesCommentsCreate(rw http.ResponseWriter, r *http.Request) 
 $ swagger generate spec -o ./swagger.json --input documentation/swagger-extra.yaml --scan-models
 ```
 
-### 2. Generate & use the TS client
+### 2. Generate & use the typescript client
 
 ```sh
 > npx openapi-typescript-codegen --input openapi.json --output clients --useOptions --name FoodyClient
 ```
 
-Integrate the generated client to the TS APP
+Integrate the generated client to the typescript app
 
 ```ts
 import { FoodyClient } from 'clients'
@@ -144,7 +144,7 @@ client.recipesCommentsCreate({ ... })
 
 ### 3. Models
 
-Responses and requests class are also converted to TS interface and can be found in the [models/](./example/clients/models/) directory.
+Responses and requests class are also converted to typescript interface and can be found in the [models/](./example/clients/models/) directory.
 
 **[api/routers/schemas/recipes_comments.py](./api/routers/schemas/recipes_comments.py)**
 
@@ -165,9 +165,9 @@ export type RecipeComment = {
 
 ## Automatisation
 
-### 1. Generate NPM TS client
+### 1. Generate NPM typescript client
 
-Everytime a new tag is added to the API, the following github workflow will publish the package.
+Everytime a new tag is added to the api, the following github workflow will publish the package.
 
 #### Github Actions
 

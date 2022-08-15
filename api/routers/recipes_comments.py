@@ -5,45 +5,46 @@ routes.recipes_comments
 All routes related to recipe comment resources.
 """
 
+from random import randrange
 from fastapi import (
     APIRouter,
     Depends,
     Request,
     Response,
 )
-from routers.schemas.recipes_comments import RecipeComment
+from routers.schemas.recipes_comments import ListRecipesComments, ListRecipesCommentsQuery, PatchRecipeCommentPayload, PostRecipeCommentPayload, RecipeComment
 from routers.schemas.base import ERROR_RESPONSES
-from routers.schemas.recipes import (
-    ListRecipesQuery,
-    ListRecipes,
-    PatchRecipePayload,
-    PostRecipePayload,
-)
+
 
 router = APIRouter(
-    prefix="/recipes/{recipe_id}/comments",
     tags=["recipesComments"],
     responses={"403": ERROR_RESPONSES[403]},
 )
 
 
 @router.get(
-    "/",
+    "/recipes/{recipe_id}/comments",
     name="recipes comments list",
     status_code=200,
-    response_model=ListRecipes,
+    response_model=ListRecipesComments,
 )
 async def get_recipe_comments(
     request: Request,
     recipe_id: int,
-    query: ListRecipesQuery = Depends(ListRecipesQuery),
+    query: ListRecipesCommentsQuery = Depends(ListRecipesCommentsQuery),
 ):
     """Lists all recipe comments"""
-    return {"meta": {"total": 2}, "recipes": []}
+    return {
+        "meta": {"total": 2},
+        "comments": [
+            {"id": 1, "message": "Amazing !"},
+            {"id": 2, "message": "Love it 10/10 !!"}
+        ]
+    }
 
 
 @router.post(
-    "/",
+    "/recipes/{recipe_id}/comments",
     name="recipes comments create",
     status_code=201,
     response_model=RecipeComment,
@@ -51,14 +52,14 @@ async def get_recipe_comments(
 async def post_recipe_comment(
     request: Request,
     recipe_id: int,
-    payload: PostRecipePayload,
+    payload: PostRecipeCommentPayload,
 ):
     """Creates a new recipe comment."""
-    return Response(status_code=204)
+    return {"id": randrange(2, 100), "message": payload.message}
 
 
 @router.get(
-    "/{comment_id}",
+    "/recipes/{recipe_id}/comments/{comment_id}",
     name="recipes comments retrieve",
     status_code=200,
     response_model=RecipeComment,
@@ -70,11 +71,11 @@ async def get_recipe_comment(
     comment_id: int,
 ):
     """Gets a specific recipe comment's information."""
-    return Response(status_code=204)
+    return {"id": 2, "message": "Love it 10/10 !!"}
 
 
 @router.patch(
-    "/{comment_id}",
+    "/recipes/{recipe_id}/comments/{comment_id}",
     name="recipes comments update",
     status_code=200,
     response_model=RecipeComment,
@@ -86,14 +87,14 @@ async def patch_recipe_comment(
     request: Request,
     recipe_id: int,
     comment_id: int,
-    payload: PatchRecipePayload,
+    payload: PatchRecipeCommentPayload,
 ):
     """Updates a recipe comment."""
-    return Response(status_code=204)
+    return {"id": 2, "message": "Love it 10/10 !!"}
 
 
 @router.delete(
-    "/{comment_id}",
+    "/recipes/{recipe_id}/comments/{comment_id}",
     name="recipes comments delete",
     status_code=200,
     response_model=None,

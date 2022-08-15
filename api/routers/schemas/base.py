@@ -72,9 +72,9 @@ class GenericHttpError(BaseModel):
 
 
 ERROR_RESPONSES = {
-    400: {"model": GenericHttpError, "description": "Validation error"},
-    403: {"model": GenericHttpError, "description": "Not enough privileges"},
-    404: {"model": GenericHttpError, "description": "Item not found"},
-    409: {"model": GenericHttpError, "description": "Violation of unique constraint"},
-    410: {"model": GenericHttpError, "description": "Item no longer exists"},
+    400: {"model": GenericHttpError, "description": "validation error"},
+    401: {"model": GenericHttpError, "description": "unauthorized"},
+    403: {"model": GenericHttpError, "description": "not enough privileges"},
+    404: {"model": GenericHttpError, "description": "item not found"},
+    409: {"model": GenericHttpError, "description": "violation of unique constraint"},
 }
