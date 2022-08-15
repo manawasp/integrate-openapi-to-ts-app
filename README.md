@@ -57,7 +57,7 @@ def recipes_comments_create():
     ...
 ```
 
-We are used the following script to generate the `openapi.json`,
+The following script generates the `openapi.json`,
 
 **[api/openapi.py](./api/openapi.py)**
 
