@@ -9,6 +9,7 @@ specifiers:
   '@vue/test-utils': ^2.0.2
   '@vueuse/core': ^9.1.0
   eslint: ^8.22.0
+  integrate-openapi-to-ts-app: ^0.0.4
   jsdom: ^20.0.0
   pnpm: ^7.9.0
   taze: ^0.7.6
@@ -25,6 +26,7 @@ specifiers:
 
 dependencies:
   '@vueuse/core': 9.1.0_vue@3.2.37
+  integrate-openapi-to-ts-app: 0.0.4
   vue: 3.2.37
   vue-router: 4.1.3_vue@3.2.37
 
@@ -2667,6 +2669,10 @@ packages:
   /ini/1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: true
+
+  /integrate-openapi-to-ts-app/0.0.4:
+    resolution: {integrity: sha512-BT7Wj4Eq2u43ofQRmCkO9dm/K+0fOGvDDy9yPg82RjCPzxMK7Ls9hPwWFxtxGf1fUTjD5pUvGz1g9RBSg1buNg==}
+    dev: false
 
   /internal-slot/1.0.3:
     resolution: {integrity: sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA==}

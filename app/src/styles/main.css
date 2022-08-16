@@ -1,11 +1,43 @@
 html,
-body,
-#app {
+body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: #F6F8FC;
 }
 
 html.dark {
   background: #121212;
+}
+
+
+#app {
+  background: #fff;
+  box-sizing: border-box;
+  margin: 2rem auto;
+  max-width: 840px;
+  padding: 2rem 3.5rem;
+  position: relative;
+}
+nav {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+}
+
+a:not(.btn) {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.333);
+}
+
+a:hover {
+  transition: all .3s;
+  color: #34bcb1;
+}
+
+
+.dark #app {
+  background: #2c2b2e;
+}
+.dark a:not(.btn) {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.333);
 }

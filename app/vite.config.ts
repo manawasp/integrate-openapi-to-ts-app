@@ -47,6 +47,16 @@ export default defineConfig({
     Unocss(),
   ],
 
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: path => path.replace('/api', ''),
+      },
+    },
+  },
+
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.1.0",
+    "integrate-openapi-to-ts-app": "^0.0.4",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },
