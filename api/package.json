@@ -1,6 +1,6 @@
 {
   "name": "integrate-openapi-to-ts-app",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Generated API client from openapi",
   "main": "clients/index.ts",
   "scripts": {
