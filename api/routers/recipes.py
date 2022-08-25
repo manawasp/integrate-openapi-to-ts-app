@@ -54,7 +54,7 @@ async def get_recipes(
     status_code=201,
     response_model=Recipe,
 )
-async def post_rreccipe(
+async def post_recipe(
     request: Request,
     payload: PostRecipePayload,
 ):
