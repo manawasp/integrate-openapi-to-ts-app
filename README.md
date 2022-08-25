@@ -1,6 +1,6 @@
 # Integrate OpenAPI to TS app
 
-Demonstrate a strategy to limit api integration friction in a typescript application.
+Demonstrate a strategy to limit api integration friction in a typescript application based on the openapi generation.
 
 > Application could be split into two parts: frontend and backend. Extra attention will be required as we need to integrate the api communication.
 > We will explore a solution to avoid mistake and facilitate integration.
