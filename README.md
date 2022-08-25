@@ -5,6 +5,10 @@ Demonstrate a strategy to limit api integration friction in a typescript applica
 > Application could be split into two parts: frontend and backend. Extra attention will be required as we need to integrate the api communication.
 > We will explore a solution to avoid mistake and facilitate integration.
 
+<p align="center">
+  <img src="./images/overview.png">
+</p>
+
 ## Summary
 
 - [Integrate OpenAPI to TS app](#integrate-openapi-to-ts-app)
